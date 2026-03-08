@@ -11,6 +11,8 @@ const { current } = Astro.props;
 <style is:global>
   .hintarrow {display: none;}
   body{overflow:hidden;}
+  .slider, .mslider { opacity: 0; }
+  .slick-initialized.slider, .slick-initialized.mslider { opacity: 1; }
   #mobile {
     display: none;
     height: calc((100vw) / 0.8);

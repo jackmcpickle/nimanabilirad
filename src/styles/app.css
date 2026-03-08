@@ -73,51 +73,6 @@
     margin: 0;
   }
 
-  #preloader {
-    display: none;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    z-index: 99;
-    top: 0;
-    bottom: 0;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .spinner-border {
-    display: inline-block;
-    width: 34px !important;
-    height: 34px !important;
-    vertical-align: text-bottom;
-    border: 0.25em solid currentColor;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: spinner-border 0.75s linear infinite;
-  }
-
-  @keyframes spinner-border {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .text-light {
-    color: rgba(255, 255, 255, 0.8) !important;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
   .banner {
     background: black;
     width: 100vw;

@@ -71,10 +71,6 @@ import { featured } from '../data/film-categories';
       $("#bottomcontent").css("margin-top", "0px");
       $("body").css("overflow", "auto");
     }
-    function offpreloader() {
-      $("#preloader").css("display", "none");
-    }
-
     function initHoverEffects() {
       Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
         const imgs = Array.from(el.querySelectorAll('img'));
@@ -95,7 +91,6 @@ import { featured } from '../data/film-categories';
     }
 
     $("#bottommenu").on("click", function(){
-      $("#preloader").css("display", "flex");
       $(".menu").css("opacity", "0");
       $(".menuall").css("opacity", "0");
       $("#bottomcontent").css("display", "flex");
@@ -103,18 +98,15 @@ import { featured } from '../data/film-categories';
       $("#info-content").css("display", "none");
       initHoverEffects();
       setTimeout(slidebottom, 1000);
-      setTimeout(offpreloader, 1000);
     });
 
     $("#leftmenu").on("click", function(){
-      $("#preloader").css("display", "flex");
       $(".menu").css("opacity", "0");
       $(".menuall").css("opacity", "0");
       $("#bottomcontent").css("display", "flex");
       $("#info-content").css("display", "block");
       $("#film-content").css("display", "none");
       setTimeout(slidebottom, 1000);
-      setTimeout(offpreloader, 1000);
     });
   </script>
 </BaseLayout>

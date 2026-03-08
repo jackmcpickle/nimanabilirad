@@ -55,71 +55,57 @@ const { leftImages, rightImages, mobileImages, breakpoint = 1024, slickOptions, 
     }
   }
 
-  $('#preloader').css("display", "flex");
-  $('.top80').css("opacity", ".2");
+  const opts = Object.assign({
+    dots: false,
+    vertical: true,
+    verticalSwiping: true,
+    arrows: false,
+    speed: 500,
+    cssEase: 'ease',
+    fade: false,
+    useTransform: false,
+    lazyLoad: 'ondemand'
+  }, slickOptions);
 
-  function preloaderFadeOutInit(){
-    $('#preloader').fadeOut('slow');
-    $('.top80').css("opacity", "1");
-    console.log("loading");
-    const opts = Object.assign({
-      dots: false,
-      vertical: true,
-      verticalSwiping: true,
-      arrows: false,
-      speed: 500,
-      cssEase: 'ease',
-      fade: false,
-      useTransform: false,
-      lazyLoad: 'ondemand'
-    }, slickOptions);
-
-    if ($(window).width()! > breakpoint) {
-      ($('.slider') as any).slick(opts);
-    } else {
-      $('.top80').css("padding-top", "0");
-      $('#left').css("display", "none");
-      $('#right').css("display", "none");
-      $('#mobile').css("display", "flex");
-      ($('.mslider') as any).slick(opts);
-    }
-
-    let blocked = false;
-    let blockTimeout: ReturnType<typeof setTimeout> | null = null;
-    let prevDeltaY = 0;
-
-    document.body.addEventListener('wheel', function(e: WheelEvent) {
-      const deltaY = e.deltaY;
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (blockTimeout) clearTimeout(blockTimeout);
-      blockTimeout = setTimeout(function(){
-        blocked = false;
-      }, 100);
-
-      if (deltaY > 0 && deltaY > prevDeltaY || deltaY < 0 && deltaY < prevDeltaY || !blocked) {
-        blocked = true;
-        prevDeltaY = deltaY;
-
-        if (deltaY > 0) {
-          safeSlick('#left .slider', 'slickNext');
-          safeSlick('#right .slider', 'slickPrev');
-          safeSlick('#mobile .mslider', 'slickNext');
-        } else {
-          safeSlick('#left .slider', 'slickPrev');
-          safeSlick('#right .slider', 'slickNext');
-          safeSlick('#mobile .mslider', 'slickPrev');
-        }
-      }
-    }, { passive: false });
+  if ($(window).width()! > breakpoint) {
+    ($('.slider') as any).slick(opts);
+  } else {
+    $('.top80').css("padding-top", "0");
+    $('#left').css("display", "none");
+    $('#right').css("display", "none");
+    $('#mobile').css("display", "flex");
+    ($('.mslider') as any).slick(opts);
   }
 
-  $(document).ready(function() {
-    setTimeout(function() {
-      preloaderFadeOutInit();
-    }, 3000);
-  });
+  let blocked = false;
+  let blockTimeout: ReturnType<typeof setTimeout> | null = null;
+  let prevDeltaY = 0;
+
+  document.body.addEventListener('wheel', function(e: WheelEvent) {
+    const deltaY = e.deltaY;
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (blockTimeout) clearTimeout(blockTimeout);
+    blockTimeout = setTimeout(function(){
+      blocked = false;
+    }, 100);
+
+    if (deltaY > 0 && deltaY > prevDeltaY || deltaY < 0 && deltaY < prevDeltaY || !blocked) {
+      blocked = true;
+      prevDeltaY = deltaY;
+
+      if (deltaY > 0) {
+        safeSlick('#left .slider', 'slickNext');
+        safeSlick('#right .slider', 'slickPrev');
+        safeSlick('#mobile .mslider', 'slickNext');
+      } else {
+        safeSlick('#left .slider', 'slickPrev');
+        safeSlick('#right .slider', 'slickNext');
+        safeSlick('#mobile .mslider', 'slickPrev');
+      }
+    }
+  }, { passive: false });
 
   if (includeJsActions) {
     $("#left img").on('click', function() {
