@@ -17,7 +17,7 @@ const { title, current } = Astro.props;
     .headspace {padding-top: 80px;margin: auto;}
   </style>
 
-  <a class="logo-icon" href="/"><Image src={logo} alt="Nima Nabili Rad" /></a>
+  <a class="logo-icon" href="/" transition:name="logo"><Image src={logo} alt="Nima Nabili Rad" /></a>
 
   <FilmNav current={current} />
 
@@ -28,19 +28,23 @@ const { title, current } = Astro.props;
   <script>
     import hoverEffect from 'hover-effect';
 
-    Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
-      const imgs = Array.from(el.querySelectorAll('img'));
-      if (imgs.length < 2) return;
-      new hoverEffect({
-        parent: el,
-        intensity: .8,
-        speedIn: .6,
-        speedOut: 1.6,
-        hover: (el as HTMLElement).dataset.hover || undefined,
-        image1: imgs[0].getAttribute('src'),
-        image2: imgs[1].getAttribute('src'),
-        displacementImage: '/img/dis2.jpg',
-        imagesRatio: 350/800
+    document.addEventListener('astro:page-load', () => {
+      Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
+        if ((el as HTMLElement).dataset.hoverInitialized) return;
+        const imgs = Array.from(el.querySelectorAll('img'));
+        if (imgs.length < 2) return;
+        new hoverEffect({
+          parent: el,
+          intensity: .8,
+          speedIn: .6,
+          speedOut: 1.6,
+          hover: (el as HTMLElement).dataset.hover || undefined,
+          image1: imgs[0].getAttribute('src'),
+          image2: imgs[1].getAttribute('src'),
+          displacementImage: '/img/dis2.jpg',
+          imagesRatio: 350/800
+        });
+        (el as HTMLElement).dataset.hoverInitialized = 'true';
       });
     });
   </script>

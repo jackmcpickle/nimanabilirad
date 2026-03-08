@@ -1,5 +1,6 @@
 ---
 import '../styles/app.css';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -23,8 +24,11 @@ const { title } = Astro.props;
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/fav.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/fav.png">
     <link rel="icon" href="/img/fav.png" type="image/png">
+    <ViewTransitions />
   </head>
   <body class="no-padding">
-    <slot />
+    <main transition:animate="fade">
+      <slot />
+    </main>
   </body>
 </html>

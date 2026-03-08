@@ -85,9 +85,9 @@ const { current } = Astro.props;
 </style>
 
 <a class="hintarrow"><Image src={arrowDown} alt="Scroll down" /></a>
-<a class="logo-icon" href="/"><Image src={logo} alt="Nima Nabili Rad" /></a>
+<a class="logo-icon" href="/" transition:name="logo"><Image src={logo} alt="Nima Nabili Rad" /></a>
 
-<div class="w-full menucontent1">
+<div class="w-full menucontent1" transition:name="nav">
   <a href="/photo" class:list={[{ selectedpage: current === 'travel' }]}>Travel</a>
   &#8212;
   <a href="/photo-nature" class:list={[{ selectedpage: current === 'nature' }]}>Nature</a>
@@ -109,10 +109,12 @@ const { current } = Astro.props;
   window.$ = $;
   await import('slick-carousel');
 
-  $('.hintarrow').on('click', function () {
-    const $el = $('#mobile .mslider');
-    if ($el.hasClass('slick-initialized')) {
-      ($el as any).slick('slickNext');
-    }
+  document.addEventListener('astro:page-load', () => {
+    $('.hintarrow').on('click', function () {
+      const $el = $('#mobile .mslider');
+      if ($el.hasClass('slick-initialized')) {
+        ($el as any).slick('slickNext');
+      }
+    });
   });
 </script>

@@ -33,7 +33,7 @@ const { current } = Astro.props;
 </style>
 
 <div class="flex flex-wrap mx-auto max-w-[1400px] headspace">
-  <div class="w-full menucontent">
+  <div class="w-full menucontent" transition:name="nav">
     <a id="featured" href="/film" class:list={[{ selectedpage: current === 'featured' }]}>Featured</a>
     &#8212;
     <a id="branded" href="/film-branded" class:list={[{ selectedpage: current === 'branded' }]}>Branded</a>

@@ -25,7 +25,7 @@ import { featured } from '../data/film-categories';
   </style>
 
   <div class="w-full px-4">
-    <a class="logo-icon delay-wrapper" href="/"><Image src={logo} alt="Nima Nabili Rad" /></a>
+    <a class="logo-icon delay-wrapper" href="/" transition:name="logo"><Image src={logo} alt="Nima Nabili Rad" /></a>
     <a id="bottommenu" class="menuall delay-wrapper" href="#film">Film</a>
     <div class="flex flex-wrap banner delay-wrapper2">
       <div class="vimeo-wrapper"><iframe title="NIMA NABILI RAD REEL" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
@@ -51,9 +51,9 @@ import { featured } from '../data/film-categories';
     import $ from 'jquery';
     import hoverEffect from 'hover-effect';
 
-    const text = $(".text");
+    document.addEventListener('astro:page-load', () => {
+      const text = $(".text");
 
-    window.onload = function() {
       console.log("loading");
       $("body").css("opacity","1");
       $(".delay-wrapper").css("opacity","0");
@@ -67,48 +67,50 @@ import { featured } from '../data/film-categories';
         $(".vimeo-wrapper iframe").attr("src","https://player.vimeo.com/video/333709875?dnt=1&app_id=122963&autoplay=1&loop=1&controls=0&hd=0&autohide=1&background=1");
         $(".delay-wrapper2").css("opacity","1");
       }, 2000);
-    }
 
-    function slidebottom(){
-      $("#bottomcontent").css("margin-top", "0px");
-      $("body").css("overflow", "auto");
-    }
-    function initHoverEffects() {
-      Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
-        const imgs = Array.from(el.querySelectorAll('img'));
-        if (imgs.length >= 2) {
-          new hoverEffect({
-            parent: el,
-            intensity: .8,
-            speedIn: .6,
-            speedOut: 1.6,
-            hover: (el as HTMLElement).dataset.hover || undefined,
-            image1: imgs[0].getAttribute('src'),
-            image2: imgs[1].getAttribute('src'),
-            displacementImage: '/img/dis2.jpg',
-            imagesRatio: 350/800
-          });
-        }
+      function slidebottom(){
+        $("#bottomcontent").css("margin-top", "0px");
+        $("body").css("overflow", "auto");
+      }
+      function initHoverEffects() {
+        Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
+          if ((el as HTMLElement).dataset.hoverInitialized) return;
+          const imgs = Array.from(el.querySelectorAll('img'));
+          if (imgs.length >= 2) {
+            new hoverEffect({
+              parent: el,
+              intensity: .8,
+              speedIn: .6,
+              speedOut: 1.6,
+              hover: (el as HTMLElement).dataset.hover || undefined,
+              image1: imgs[0].getAttribute('src'),
+              image2: imgs[1].getAttribute('src'),
+              displacementImage: '/img/dis2.jpg',
+              imagesRatio: 350/800
+            });
+            (el as HTMLElement).dataset.hoverInitialized = 'true';
+          }
+        });
+      }
+
+      $("#bottommenu").on("click", function(){
+        $(".menu").css("opacity", "0");
+        $(".menuall").css("opacity", "0");
+        $("#bottomcontent").css("display", "flex");
+        $("#film-content").css("display", "block");
+        $("#info-content").css("display", "none");
+        initHoverEffects();
+        setTimeout(slidebottom, 1000);
       });
-    }
 
-    $("#bottommenu").on("click", function(){
-      $(".menu").css("opacity", "0");
-      $(".menuall").css("opacity", "0");
-      $("#bottomcontent").css("display", "flex");
-      $("#film-content").css("display", "block");
-      $("#info-content").css("display", "none");
-      initHoverEffects();
-      setTimeout(slidebottom, 1000);
-    });
-
-    $("#leftmenu").on("click", function(){
-      $(".menu").css("opacity", "0");
-      $(".menuall").css("opacity", "0");
-      $("#bottomcontent").css("display", "flex");
-      $("#info-content").css("display", "block");
-      $("#film-content").css("display", "none");
-      setTimeout(slidebottom, 1000);
+      $("#leftmenu").on("click", function(){
+        $(".menu").css("opacity", "0");
+        $(".menuall").css("opacity", "0");
+        $("#bottomcontent").css("display", "flex");
+        $("#info-content").css("display", "block");
+        $("#film-content").css("display", "none");
+        setTimeout(slidebottom, 1000);
+      });
     });
   </script>
 </BaseLayout>
