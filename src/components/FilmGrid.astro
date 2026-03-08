@@ -1,9 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface FilmEntry {
   slug: string;
   title: string;
-  thumbnail1: string;
-  thumbnail2: string;
+  thumbnail1: ImageMetadata;
+  thumbnail2: ImageMetadata;
 }
 
 interface Props {
@@ -18,8 +21,8 @@ const { films } = Astro.props;
     <a href={`/${film.slug}`}>
       <h4 class="newFilmTitles">{film.title}</h4>
       <div class="animate-img">
-        <img src={film.thumbnail1} alt="Image" />
-        <img src={film.thumbnail2} alt="Image" />
+        <Image src={film.thumbnail1} alt={`${film.title} thumbnail`} />
+        <Image src={film.thumbnail2} alt={`${film.title} alternate thumbnail`} />
       </div>
     </a>
   </div>

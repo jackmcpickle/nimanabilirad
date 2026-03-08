@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
-  leftImages: string[];
-  rightImages: string[];
-  mobileImages: string[];
+  leftImages: ImageMetadata[];
+  rightImages: ImageMetadata[];
+  mobileImages: ImageMetadata[];
   breakpoint?: number;
   slickOptions?: Record<string, unknown>;
   includeJsActions?: boolean;
@@ -13,22 +15,22 @@ const { leftImages, rightImages, mobileImages, breakpoint = 1024, slickOptions, 
 
 <div id="left" class="w-full md:w-1/2 no-padd">
   <div class="slider">
-    {leftImages.map((src) => (
-      <div><img src={src}></div>
+    {leftImages.map((src, i) => (
+      <div><Image src={src} alt={`Photo ${i + 1}`} /></div>
     ))}
   </div>
 </div>
 <div id="right" class="w-full md:w-1/2 no-padd">
   <div class="slider">
-    {rightImages.map((src) => (
-      <div><img src={src}></div>
+    {rightImages.map((src, i) => (
+      <div><Image src={src} alt={`Photo ${leftImages.length + i + 1}`} /></div>
     ))}
   </div>
 </div>
 <div id="mobile" class="w-full no-padd">
   <div class="mslider">
-    {mobileImages.map((src) => (
-      <div><img src={src}></div>
+    {mobileImages.map((src, i) => (
+      <div><Image src={src} alt={`Photo ${i + 1}`} /></div>
     ))}
   </div>
 </div>
@@ -122,7 +124,7 @@ const { leftImages, rightImages, mobileImages, breakpoint = 1024, slickOptions, 
       safeSlick('#mobile .mslider', 'slickNext');
     });
 
-    $(document).on('keydown', function(e){
+    $(document).on('keydown', function(e: KeyboardEvent){
       if (e.which == 37) {
         safeSlick('#left .slider', 'slickPrev');
         safeSlick('#right .slider', 'slickNext');

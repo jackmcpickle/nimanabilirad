@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import arrowDown from '../assets/img/arrow-down.png';
+import logo from '../assets/img/logo.png';
+
 interface Props {
   current?: string;
 }
@@ -80,8 +84,8 @@ const { current } = Astro.props;
   }
 </style>
 
-<a class="hintarrow"><img src="/img/arrow-down.png"></a>
-<a class="logo-icon" href="/"><img src="/img/logo.png"></a>
+<a class="hintarrow"><Image src={arrowDown} alt="Scroll down" /></a>
+<a class="logo-icon" href="/"><Image src={logo} alt="Nima Nabili Rad" /></a>
 
 <div class="w-full menucontent1">
   <a href="/photo" class:list={[{ selectedpage: current === 'travel' }]}>Travel</a>

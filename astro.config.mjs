@@ -3,7 +3,9 @@ import cloudflare from '@astrojs/cloudflare';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
   vite: {
     plugins: [tailwindcss()],
   },
