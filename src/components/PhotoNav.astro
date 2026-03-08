@@ -6,8 +6,6 @@ interface Props {
 const { current } = Astro.props;
 ---
 
-<script is:inline src="/js/slick.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.css">
 <link rel="stylesheet" href="/styles/slick.css">
 
 <style is:global>
@@ -97,10 +95,18 @@ const { current } = Astro.props;
   <a href="/photo-commercial" class:list={[{ selectedpage: current === 'commercial' }]}>Commercial</a>
 </div>
 
-<div class="flex flex-wrap w-full no-padd top80">
+<script>
+  import $ from 'jquery';
+  import 'slick-carousel/slick/slick-theme.css';
 
-<script is:inline>
-  $('.hintarrow').click(function () {
-    $('#mobile .mslider').slick('slickNext');
+  window.jQuery = $;
+  window.$ = $;
+  await import('slick-carousel');
+
+  $('.hintarrow').on('click', function () {
+    const $el = $('#mobile .mslider');
+    if ($el.hasClass('slick-initialized')) {
+      ($el as any).slick('slickNext');
+    }
   });
 </script>

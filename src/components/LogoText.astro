@@ -51,9 +51,11 @@
   }
 </style>
 
-<script is:inline>
-  var text = $(".text");
-  $("body").click(function() {
+<script>
+  import $ from 'jquery';
+
+  const text = $(".text");
+  $("body").on('click', function() {
     text.toggleClass("hidden");
   });
 </script>

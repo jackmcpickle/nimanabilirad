@@ -23,20 +23,18 @@ const { title, current } = Astro.props;
 
   </div>
 
-  <script is:inline src="/js/three.min.js"></script>
-  <script is:inline src="/js/TweenMax.min.js"></script>
-  <script is:inline src="/dist/hover-effect.umd.js"></script>
+  <script>
+    import hoverEffect from 'hover-effect';
 
-  <script is:inline>
     Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
-      var imgs = Array.from(el.querySelectorAll('img'));
+      const imgs = Array.from(el.querySelectorAll('img'));
       if (imgs.length < 2) return;
       new hoverEffect({
         parent: el,
         intensity: .8,
         speedIn: .6,
         speedOut: 1.6,
-        hover: el.dataset.hover || undefined,
+        hover: (el as HTMLElement).dataset.hover || undefined,
         image1: imgs[0].getAttribute('src'),
         image2: imgs[1].getAttribute('src'),
         displacementImage: '/img/dis2.jpg',

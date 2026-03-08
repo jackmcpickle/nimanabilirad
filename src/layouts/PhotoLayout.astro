@@ -12,6 +12,7 @@ const { title, current } = Astro.props;
 
 <BaseLayout title={title}>
   <PhotoNav current={current} />
-  <slot />
+  <div class="flex flex-wrap w-full no-padd top80">
+    <slot />
   </div>
 </BaseLayout>
