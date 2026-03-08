@@ -1,0 +1,59 @@
+---
+---
+
+<ul id="master" class="text hidden">
+  <li>N</li>
+  <li class="ghost">i</li>
+  <li class="ghost">m</li>
+  <li class="ghost">a</li>
+  <li class="spaced">N</li>
+  <li class="ghost">a</li>
+  <li class="ghost">b</li>
+  <li class="ghost">i</li>
+  <li class="ghost">l</li>
+  <li class="ghost">i</li>
+  <li class="spaced">R</li>
+  <li class="ghost">a</li>
+  <li class="ghost">d</li>
+</ul>
+
+<style is:global>
+  #master {
+    font-family:'ArchivoBlack', sans-serif;
+  }
+
+  .text {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .text li {
+    display: inline-block;
+    float: left;
+    color: #fff;
+    opacity: 1;
+    transition: all 1.5s ease;
+    max-width: 3em;
+    padding-left: 0;
+  }
+  .text.hidden li.spaced {
+    padding-left: 0;
+    transition: all 1.5s ease;
+  }
+  .text li.spaced {
+    padding-left: 10px;
+    transition: all 1.5s ease;
+  }
+
+  .text.hidden li.ghost {
+    opacity: 0;
+    max-width: 0;
+  }
+</style>
+
+<script is:inline>
+  var text = $(".text");
+  $("body").click(function() {
+    text.toggleClass("hidden");
+  });
+</script>

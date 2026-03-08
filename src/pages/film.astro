@@ -1,0 +1,9 @@
+---
+import FilmCategoryLayout from '../layouts/FilmCategoryLayout.astro';
+import FilmGrid from '../components/FilmGrid.astro';
+import { featured } from '../data/film-categories';
+---
+
+<FilmCategoryLayout title="Featured - Film - NIMA NABILI RAD" current="featured">
+  <FilmGrid films={featured} />
+</FilmCategoryLayout>

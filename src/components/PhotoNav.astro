@@ -1,0 +1,106 @@
+---
+interface Props {
+  current?: string;
+}
+
+const { current } = Astro.props;
+---
+
+<script is:inline src="/js/slick.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.css">
+<link rel="stylesheet" href="/styles/slick.css">
+
+<style is:global>
+  .hintarrow {display: none;}
+  body{overflow:hidden;}
+  #mobile {
+    display: none;
+    height: calc((100vw) / 0.8);
+    overflow: hidden;
+  }
+  .slick-slide {min-height: 667px; transition: all 3s ease;}
+  .slick-slide img {min-height: 667px; margin: auto;transition: all 3s ease}
+  #left img {float:right;}
+  #right img {float:left;}
+  #left .slick-slider {
+    margin-right:5px;
+  }
+  #right .slick-slider {
+    margin-left:5px;
+  }
+  .top80 {
+    transition: all .3s ease;
+    overflow: hidden;
+    min-height: 100vh;
+    align-items: center;
+  }
+  .slick-loading {transition: all 4s ease;opacity: 0;}
+  #left .slick-slide {
+    background: url(/img/eclipse3.gif) no-repeat !important;
+    background-position: right center !important;
+    background-size: 500px !important;
+  }
+  #right .slick-slide {
+    background: url(/img/eclipse3.gif) no-repeat !important;
+    background-position: left center !important;
+    background-size: 500px !important;
+  }
+  .slick-slide {
+    background: url(/img/eclipse.gif) no-repeat;
+    background-position: center;
+    background-size: 150px;
+  }
+  @media only screen and (max-height: 920px) {
+    .top80 {padding-top: 80px;}
+    .logo-icon {top: 10px;transition:all .3s ease;}
+    .menucontent1 {top: 50px;transition:all .3s ease;}
+  }
+  @media only screen and (max-width: 1024px) {
+    .slick-slide {min-height: inherit;overflow: hidden;}
+    .slick-slide img {
+      min-height: inherit;
+      max-width: 100vw;
+    }
+    #mobile {align-items:center;}
+  }
+  @media (max-width:560px) {
+    .hintarrow {
+      display: block;
+      position: fixed;
+      bottom: 10vh;
+      width: 100%;
+      text-align: center;
+      z-index: 1;
+    }
+    .hintarrow img{
+      max-width: 40px;
+    }
+    .logo-icon {top: 20px;}
+    .menucontent1 {padding-top: 32px;}
+  }
+</style>
+
+<a class="hintarrow"><img src="/img/arrow-down.png"></a>
+<a class="logo-icon" href="/"><img src="/img/logo.png"></a>
+
+<div class="w-full menucontent1">
+  <a href="/photo" class:list={[{ selectedpage: current === 'travel' }]}>Travel</a>
+  &#8212;
+  <a href="/photo-nature" class:list={[{ selectedpage: current === 'nature' }]}>Nature</a>
+  &#8212;
+  <a href="/photo-architecture" class:list={[{ selectedpage: current === 'architecture' }]}>Architecture</a>
+  &#8212;
+  <a href="/photo-fashion" class:list={[{ selectedpage: current === 'fashion' }]}>Fashion</a>
+  &#8212;
+  <a href="/photo-portrait" class:list={[{ selectedpage: current === 'portrait' }]}>Portrait</a>
+  &#8212;
+  <a href="/photo-commercial" class:list={[{ selectedpage: current === 'commercial' }]}>Commercial</a>
+</div>
+
+<div class="flex flex-wrap w-full no-padd top80">
+
+<script is:inline>
+  $('.hintarrow').click(function () {
+    $('#mobile .mslider').slick('slickNext');
+  });
+</script>

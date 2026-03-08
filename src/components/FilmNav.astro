@@ -1,0 +1,47 @@
+---
+interface Props {
+  current?: string;
+}
+
+const { current } = Astro.props;
+---
+
+<style is:global>
+  .h37 {
+    height: calc((50vw - 50px) / 2.2);
+    padding: 5px;
+  }
+
+  .animate-img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
+  .animate-img img {display: none;}
+
+  @media only screen and (min-width: 1400px) {
+    .h37 {
+      height: calc((685px - 50px) / 2.2);
+    }
+  }
+  @media only screen and (max-width: 760px) {
+    .h37 {
+      height: calc((100vw - 50px) / 2.2);
+    }
+  }
+</style>
+
+<div class="flex flex-wrap mx-auto max-w-[1400px] headspace">
+  <div class="w-full menucontent">
+    <a id="featured" href="/film" class:list={[{ selectedpage: current === 'featured' }]}>Featured</a>
+    &#8212;
+    <a id="branded" href="/film-branded" class:list={[{ selectedpage: current === 'branded' }]}>Branded</a>
+    &#8212;
+    <a id="shorts" href="/film-shorts" class:list={[{ selectedpage: current === 'shorts' }]}>Shorts</a>
+    &#8212;
+    <a id="music" href="/film-music" class:list={[{ selectedpage: current === 'music' }]}>Music Videos</a>
+    &#8212;
+    <a id="fashion" href="/film-fashion" class:list={[{ selectedpage: current === 'fashion' }]}>Fashion</a>
+  </div>
+</div>

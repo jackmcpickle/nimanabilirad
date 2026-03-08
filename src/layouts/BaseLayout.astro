@@ -1,0 +1,31 @@
+---
+import '../styles/app.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{title}</title>
+    <meta name="description" content="NIMA NABILI RAD DIRECTOR">
+    <script is:inline src="/js/jquery.min.js"></script>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/fav.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/fav.png">
+    <link rel="icon" href="/img/fav.png" type="image/png">
+  </head>
+  <body class="no-padding">
+    <div id="preloader">
+      <div class="spinner-border text-light" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const films = await getCollection('films');
+  return films.map((film) => ({
+    params: { slug: film.id },
+    props: { film: film.data },
+  }));
+}
+
+interface Props {
+  film: {
+    title: string;
+    vimeoId: string | null;
+    youtubeId?: string;
+    vimeoId2?: string;
+    description: string;
+    imageCount: number;
+    imagePath: string | null;
+    imageExtension?: string;
+  };
+}
+
+const { film } = Astro.props;
+const ext = film.imageExtension || '.jpg';
+const images: string[] = [];
+if (film.imagePath && film.imageCount > 0) {
+  for (let i = 1; i <= film.imageCount; i++) {
+    images.push(`${film.imagePath}${i}${ext}`);
+  }
+}
+---
+
+<BaseLayout title={film.title}>
+  <style is:global>
+    #film {
+      padding: 24px 0px 0px 20px;
+      z-index: 10;
+    }
+    #photo {
+      padding: 24px 20px 0px 0;
+      z-index: 10;
+      right: 0;
+    }
+  </style>
+
+  <a class="logo-icon" href="/"><img src="/img/logo.png"></a>
+  <a id="film" class="menuall" href="/film">Film</a>
+  <a id="photo" class="menuall" href="/photo">Photo</a>
+  <div class="w-full px-4">
+    <div class="flex flex-wrap text-center">
+      <div class="w-full videobar">
+        {film.vimeoId ? (
+          <iframe src={`https://player.vimeo.com/video/${film.vimeoId}`} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        ) : film.youtubeId ? (
+          <iframe src={`https://www.youtube.com/embed/${film.youtubeId}`} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        ) : null}
+      </div>
+
+      {film.vimeoId2 && (
+        <div class="w-full videobar">
+          <iframe src={`https://player.vimeo.com/video/${film.vimeoId2}`} frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      )}
+
+      <div class="w-full videotext">
+        <h2>{film.title.replace(' - NIMA NABILI RAD', '')}</h2>
+        {film.description && <p set:html={film.description} />}
+      </div>
+
+      {images.length > 0 && (
+        <div class="w-full imgspace">
+          {images.map((src) => (
+            <img src={src} loading="lazy" />
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>

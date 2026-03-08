@@ -1,0 +1,47 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FilmNav from '../components/FilmNav.astro';
+
+interface Props {
+  title: string;
+  current: string;
+}
+
+const { title, current } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <style is:global>
+    .headspace {padding-top: 80px;margin: auto;}
+  </style>
+
+  <a class="logo-icon" href="/"><img src="/img/logo.png" alt="Logo"></a>
+
+  <FilmNav current={current} />
+
+  <slot />
+
+  </div>
+
+  <script is:inline src="/js/three.min.js"></script>
+  <script is:inline src="/js/TweenMax.min.js"></script>
+  <script is:inline src="/dist/hover-effect.umd.js"></script>
+
+  <script is:inline>
+    Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
+      var imgs = Array.from(el.querySelectorAll('img'));
+      if (imgs.length < 2) return;
+      new hoverEffect({
+        parent: el,
+        intensity: .8,
+        speedIn: .6,
+        speedOut: 1.6,
+        hover: el.dataset.hover || undefined,
+        image1: imgs[0].getAttribute('src'),
+        image2: imgs[1].getAttribute('src'),
+        displacementImage: '/img/dis2.jpg',
+        imagesRatio: 350/800
+      });
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PhotoNav from '../components/PhotoNav.astro';
+
+interface Props {
+  title: string;
+  current: string;
+}
+
+const { title, current } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <PhotoNav current={current} />
+  <slot />
+  </div>
+</BaseLayout>

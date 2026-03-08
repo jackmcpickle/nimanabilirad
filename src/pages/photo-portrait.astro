@@ -1,0 +1,9 @@
+---
+import PhotoLayout from '../layouts/PhotoLayout.astro';
+import PhotoCarousel from '../components/PhotoCarousel.astro';
+import { portrait } from '../data/photo-categories';
+---
+
+<PhotoLayout title="Portrait - Photo - NIMA NABILI RAD" current="portrait">
+  <PhotoCarousel leftImages={portrait.left} rightImages={portrait.right} mobileImages={portrait.mobile} />
+</PhotoLayout>

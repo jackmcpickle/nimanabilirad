@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LogoText from '../components/LogoText.astro';
+import FilmNav from '../components/FilmNav.astro';
+import FilmGrid from '../components/FilmGrid.astro';
+import InfoSection from '../components/InfoSection.astro';
+import { featured } from '../data/film-categories';
+---
+
+<BaseLayout title="NIMA NABILI RAD DIRECTOR">
+  <style is:global>
+    body {overflow: hidden;opacity:0;transition:opacity 1s ease;}
+    .delay-wrapper {opacity:0;transition:opacity 1s ease;}
+    .delay-wrapper2 {opacity:0;transition:opacity 2s ease;}
+    @media (max-width:560px) {
+      #bottomcontent {
+        max-width:100vw;
+        width:100vw;
+        overflow-x:hidden;
+        margin: 0 !important;
+      }
+    }
+  </style>
+
+  <div class="w-full px-4">
+    <a class="logo-icon delay-wrapper" href="/"><img src="/img/logo.png"></a>
+    <a id="bottommenu" class="menuall delay-wrapper" href="#film">Film</a>
+    <div class="flex flex-wrap banner delay-wrapper2">
+      <div class="vimeo-wrapper"><iframe title="NIMA NABILI RAD REEL" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+    </div>
+    </div>
+    <div class="flex flex-wrap menu text-center">
+      <a id="logo-text"><div class="mobile-only">Nima Nabili Rad</div><div class="all-screen"><LogoText /></div></a>
+      <a id="leftmenu" class="menuall delay-wrapper" href="#info"> Info</a>
+      <a id="rightmenu" class="menuall delay-wrapper" href="/photo">Photo</a>
+    </div>
+    <div id="bottomcontent" class="flex flex-wrap bottom-content" style="display:none;">
+      <div id="film-content" style="display:none;width:100%;">
+        <FilmNav current="featured" />
+        <FilmGrid films={featured} />
+        <script is:inline src="/js/three.min.js"></script>
+        <script is:inline src="/js/TweenMax.min.js"></script>
+        <script is:inline src="/dist/hover-effect.umd.js"></script>
+      </div>
+      <div id="info-content" style="display:none;width:100%;">
+        <InfoSection />
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    window.onload = function() {
+      console.log("loading");
+      $("body").css("opacity","1");
+      $(".delay-wrapper").css("opacity","0");
+      setTimeout(function() {
+        text.removeClass("hidden");
+      }, 1200);
+      setTimeout(function() {
+        $(".delay-wrapper").css("opacity","1");
+      }, 1700);
+      setTimeout(function() {
+        $(".vimeo-wrapper iframe").attr("src","https://player.vimeo.com/video/333709875?dnt=1&app_id=122963&autoplay=1&loop=1&controls=0&hd=0&autohide=1&background=1");
+        $(".delay-wrapper2").css("opacity","1");
+      }, 2000);
+    }
+
+    function slidebottom(){
+      $("#bottomcontent").css("margin-top", "0px");
+      $("body").css("overflow", "auto");
+    }
+    function offpreloader() {
+      $("#preloader").css("display", "none");
+    }
+
+    function initHoverEffects() {
+      Array.from(document.querySelectorAll('.animate-img')).forEach(function(el) {
+        var imgs = Array.from(el.querySelectorAll('img'));
+        if (imgs.length >= 2) {
+          new hoverEffect({
+            parent: el,
+            intensity: .8,
+            speedIn: .6,
+            speedOut: 1.6,
+            hover: el.dataset.hover || undefined,
+            image1: imgs[0].getAttribute('src'),
+            image2: imgs[1].getAttribute('src'),
+            displacementImage: '/img/dis2.jpg',
+            imagesRatio: 350/800
+          });
+        }
+      });
+    }
+
+    $("#bottommenu").on("click", function(){
+      $("#preloader").css("display", "flex");
+      $(".menu").css("opacity", "0");
+      $(".menuall").css("opacity", "0");
+      $("#bottomcontent").css("display", "flex");
+      $("#film-content").css("display", "block");
+      $("#info-content").css("display", "none");
+      initHoverEffects();
+      setTimeout(slidebottom, 1000);
+      setTimeout(offpreloader, 1000);
+    });
+
+    $("#leftmenu").on("click", function(){
+      $("#preloader").css("display", "flex");
+      $(".menu").css("opacity", "0");
+      $(".menuall").css("opacity", "0");
+      $("#bottomcontent").css("display", "flex");
+      $("#info-content").css("display", "block");
+      $("#film-content").css("display", "none");
+      setTimeout(slidebottom, 1000);
+      setTimeout(offpreloader, 1000);
+    });
+  </script>
+</BaseLayout>

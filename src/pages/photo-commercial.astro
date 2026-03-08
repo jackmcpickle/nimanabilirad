@@ -1,0 +1,9 @@
+---
+import PhotoLayout from '../layouts/PhotoLayout.astro';
+import PhotoCarousel from '../components/PhotoCarousel.astro';
+import { commercial } from '../data/photo-categories';
+---
+
+<PhotoLayout title="Commercial - Photo - NIMA NABILI RAD" current="commercial">
+  <PhotoCarousel leftImages={commercial.left} rightImages={commercial.right} mobileImages={commercial.mobile} />
+</PhotoLayout>

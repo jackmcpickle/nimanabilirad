@@ -1,0 +1,9 @@
+---
+import PhotoLayout from '../layouts/PhotoLayout.astro';
+import PhotoCarousel from '../components/PhotoCarousel.astro';
+import { nature } from '../data/photo-categories';
+---
+
+<PhotoLayout title="Nature - Photo - NIMA NABILI RAD" current="nature">
+  <PhotoCarousel leftImages={nature.left} rightImages={nature.right} mobileImages={nature.mobile} />
+</PhotoLayout>

@@ -1,0 +1,26 @@
+---
+interface FilmEntry {
+  slug: string;
+  title: string;
+  thumbnail1: string;
+  thumbnail2: string;
+}
+
+interface Props {
+  films: FilmEntry[];
+}
+
+const { films } = Astro.props;
+---
+
+{films.map((film) => (
+  <div class="w-full md:w-1/2 h37 video-titles">
+    <a href={`/${film.slug}`}>
+      <h4 class="newFilmTitles">{film.title}</h4>
+      <div class="animate-img">
+        <img src={film.thumbnail1} alt="Image" />
+        <img src={film.thumbnail2} alt="Image" />
+      </div>
+    </a>
+  </div>
+))}

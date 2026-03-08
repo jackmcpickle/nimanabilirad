@@ -1,0 +1,19 @@
+---
+import FilmCategoryLayout from '../layouts/FilmCategoryLayout.astro';
+import FilmGrid from '../components/FilmGrid.astro';
+import { branded2 } from '../data/film-categories';
+---
+
+<FilmCategoryLayout title="Branded - Film - NIMA NABILI RAD" current="branded">
+  <FilmGrid films={branded2} />
+
+  <div class="flex flex-wrap mx-auto mxwidth headspace">
+    <div class="w-full menucontent">
+      <a href="#">Pages</a>
+      &#8212;
+      <a href="/film-branded">1</a>
+      &#8212;
+      <a class="selectedpage">2</a>
+    </div>
+  </div>
+</FilmCategoryLayout>

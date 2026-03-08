@@ -1,0 +1,143 @@
+---
+interface Props {
+  leftImages: string[];
+  rightImages: string[];
+  mobileImages: string[];
+  breakpoint?: number;
+  slickOptions?: Record<string, unknown>;
+  includeJsActions?: boolean;
+}
+
+const { leftImages, rightImages, mobileImages, breakpoint = 1024, slickOptions, includeJsActions = true } = Astro.props;
+---
+
+<div id="left" class="w-full md:w-1/2 no-padd">
+  <div class="slider">
+    {leftImages.map((src) => (
+      <div><img src={src}></div>
+    ))}
+  </div>
+</div>
+<div id="right" class="w-full md:w-1/2 no-padd">
+  <div class="slider">
+    {rightImages.map((src) => (
+      <div><img src={src}></div>
+    ))}
+  </div>
+</div>
+<div id="mobile" class="w-full no-padd">
+  <div class="mslider">
+    {mobileImages.map((src) => (
+      <div><img src={src}></div>
+    ))}
+  </div>
+</div>
+
+<script is:inline define:vars={{ breakpoint, slickOptions: slickOptions || {} }}>
+  $('#preloader').css("display", "flex");
+  $('.top80').css("opacity", ".2");
+
+  function preloaderFadeOutInit(){
+    $('#preloader').fadeOut('slow');
+    $('.top80').css("opacity", "1");
+    console.log("loading");
+    var opts = Object.assign({
+      dots: false,
+      vertical: true,
+      verticalSwiping: true,
+      arrows: false,
+      speed: 500,
+      cssEase: 'ease',
+      fade: false,
+      useTransform: false,
+      lazyLoad: 'ondemand'
+    }, slickOptions);
+
+    if ($(window).width() > breakpoint) {
+      $('.slider').slick(opts);
+    } else {
+      $('.top80').css("padding-top", "0");
+      $('#left').css("display", "none");
+      $('#right').css("display", "none");
+      $('#mobile').css("display", "flex");
+      $('.mslider').slick(opts);
+    }
+
+    var blocked = false;
+    var blockTimeout = null;
+    var prevDeltaY = 0;
+
+    $("body").on('mousewheel DOMMouseScroll wheel', function(e) {
+      var deltaY = e.originalEvent.deltaY;
+      e.preventDefault();
+      e.stopPropagation();
+
+      clearTimeout(blockTimeout);
+      blockTimeout = setTimeout(function(){
+        blocked = false;
+      }, 100);
+
+      if (deltaY > 0 && deltaY > prevDeltaY || deltaY < 0 && deltaY < prevDeltaY || !blocked) {
+        blocked = true;
+        prevDeltaY = deltaY;
+
+        if (deltaY > 0) {
+          $('#left .slider').slick('slickNext');
+          $('#right .slider').slick('slickPrev');
+          $('#mobile .mslider').slick('slickNext');
+        } else {
+          $('#left .slider').slick('slickPrev');
+          $('#right .slider').slick('slickNext');
+          $('#mobile .mslider').slick('slickPrev');
+        }
+      }
+    });
+  }
+
+  $(document).ready(function() {
+    setTimeout(function() {
+      preloaderFadeOutInit();
+    }, 3000);
+  });
+</script>
+
+{includeJsActions && (
+  <script is:inline>
+    $("#left img").click(function() {
+      $('#left .slider').slick('slickPrev');
+      $('#right .slider').slick('slickNext');
+    });
+
+    $("#right img").click(function() {
+      $('#left .slider').slick('slickNext');
+      $('#right .slider').slick('slickPrev');
+    });
+
+    $("#mobile img").click(function() {
+      $('#mobile .mslider').slick('slickNext');
+    });
+
+    $(document).keydown(function(e){
+      if (e.which == 37) {
+        $('#left .slider').slick('slickPrev');
+        $('#right .slider').slick('slickNext');
+        $('#mobile .mslider').slick('slickPrev');
+      }
+      if (e.which == 39) {
+        $('#left .slider').slick('slickNext');
+        $('#right .slider').slick('slickPrev');
+        $('#mobile .mslider').slick('slickNext');
+      }
+      if (e.which == 38) {
+        $('#left .slider').slick('slickPrev');
+        $('#right .slider').slick('slickNext');
+        $('#mobile .mslider').slick('slickPrev');
+      }
+      if (e.which == 40) {
+        $('#left .slider').slick('slickNext');
+        $('#right .slider').slick('slickPrev');
+        $('#mobile .mslider').slick('slickNext');
+      }
+    });
+  </script>
+)}

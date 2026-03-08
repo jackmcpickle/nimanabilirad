@@ -1,0 +1,9 @@
+---
+import PhotoLayout from '../layouts/PhotoLayout.astro';
+import PhotoCarousel from '../components/PhotoCarousel.astro';
+import { architecture } from '../data/photo-categories';
+---
+
+<PhotoLayout title="Architecture - Photo - NIMA NABILI RAD" current="architecture">
+  <PhotoCarousel leftImages={architecture.left} rightImages={architecture.right} mobileImages={architecture.mobile} slickOptions={{ accessibility: false }} />
+</PhotoLayout>

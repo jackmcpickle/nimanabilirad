@@ -1,0 +1,9 @@
+---
+import FilmCategoryLayout from '../layouts/FilmCategoryLayout.astro';
+import FilmGrid from '../components/FilmGrid.astro';
+import { shorts } from '../data/film-categories';
+---
+
+<FilmCategoryLayout title="Shorts - Film - NIMA NABILI RAD" current="shorts">
+  <FilmGrid films={shorts} />
+</FilmCategoryLayout>

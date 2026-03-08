@@ -1,0 +1,21 @@
+---
+import FilmCategoryLayout from '../layouts/FilmCategoryLayout.astro';
+import FilmGrid from '../components/FilmGrid.astro';
+import { music1 } from '../data/film-categories';
+---
+
+<FilmCategoryLayout title="Music Videos - Film - NIMA NABILI RAD" current="music">
+  <FilmGrid films={music1} />
+
+  <div class="flex flex-wrap mx-auto mxwidth headspace">
+    <div class="w-full menucontent">
+      <a href="#">Pages</a>
+      &#8212;
+      <a class="selectedpage">1</a>
+      &#8212;
+      <a href="/film-music2">2</a>
+      &#8212;
+      <a href="/film-music3">3</a>
+    </div>
+  </div>
+</FilmCategoryLayout>

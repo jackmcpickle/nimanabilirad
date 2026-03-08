@@ -1,0 +1,348 @@
+@import "tailwindcss";
+
+@theme {
+  --font-archivo: "ArchivoBlack", sans-serif;
+  --font-fraktion: "FraktionSans-Light", sans-serif;
+  --font-fraktion-bold: "FraktionSans-Bold", sans-serif;
+}
+
+@font-face {
+  font-family: "ArchivoBlack";
+  src: url("/fonts/ArchivoBlack.otf");
+  font-display: swap;
+}
+@font-face {
+  font-family: "FraktionSans-Bold";
+  src: url("/fonts/FraktionSans-Bold.otf");
+  font-display: swap;
+}
+@font-face {
+  font-family: "FraktionSans-Light";
+  src: url("/fonts/FraktionSans-Light.otf");
+  font-display: swap;
+}
+
+/* Base styles */
+@layer base {
+  *:focus {
+    outline: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 1px;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border-radius: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    background: #000;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: hidden;
+    background: black;
+    color: white;
+    font-family: "FraktionSans-Light", sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+/* Component styles */
+@layer components {
+  .no-padding {
+    padding: 0;
+    margin: 0;
+  }
+
+  #preloader {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .spinner-border {
+    display: inline-block;
+    width: 34px !important;
+    height: 34px !important;
+    vertical-align: text-bottom;
+    border: 0.25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border 0.75s linear infinite;
+  }
+
+  @keyframes spinner-border {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .text-light {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .banner {
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+  }
+
+  .vimeo-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .vimeo-wrapper iframe {
+    width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .menucontent1 {
+    font-size: 1.2em;
+    text-align: center;
+    padding-bottom: 20px;
+    position: absolute !important;
+    top: 80px;
+    z-index: 99;
+  }
+
+  .logo-icon {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    text-align: center;
+  }
+  .logo-icon img {
+    max-width: 110px;
+  }
+
+  #logo-text {
+    font-size: 3em;
+    color: white;
+    text-decoration: none;
+    font-family: "ArchivoBlack", sans-serif;
+    transition: all 0.4s ease;
+  }
+
+  .menu {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    width: 100vw;
+    height: 100%;
+  }
+
+  .menuall {
+    font-size: 1.2em;
+    position: absolute;
+    transition: all 0.4s ease;
+  }
+  .menucontent {
+    font-size: 1.2em;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .selectedpage {
+    border: 1px solid white;
+    padding: 1px 10px 5px 10px;
+  }
+
+  #leftmenu {
+    left: 20px;
+    transition: all 0.4s ease;
+  }
+  #rightmenu {
+    right: 20px;
+    transition: all 0.4s ease;
+  }
+  #bottommenu {
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    justify-content: center;
+    z-index: 5;
+    transition: all 0.4s ease;
+  }
+
+  .bottom-content {
+    margin-top: 100vh;
+    z-index: 5;
+    color: white;
+    position: relative;
+    background: black;
+    min-height: 100vh;
+    padding: 80px 0;
+    transition: all 1s ease;
+    justify-content: center;
+  }
+  #bottomcontent {
+    display: none;
+  }
+  #leftcontent {
+    display: none;
+  }
+  #rightcontent {
+    display: none;
+  }
+
+  .videobar iframe {
+    width: 100%;
+    height: calc(56.25vw);
+  }
+  .videotext p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: 40px 0;
+  }
+  .imgspace img {
+    max-width: 100%;
+    padding: 0 0 20px 0;
+  }
+
+  .videobar {
+    padding-bottom: 60px;
+  }
+
+  .photobar img {
+    display: block;
+    max-width: 500px;
+  }
+
+  .mobile-only {
+    display: none;
+    font-size: 0.3em;
+  }
+
+  .newFilmTitles {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    font-size: 1rem;
+  }
+
+  .icon img {
+    max-width: 25px;
+    margin: 5px;
+  }
+
+  /* Slick overrides */
+  .no-padd {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* Responsive */
+@media only screen and (max-width: 1024px) {
+  #bottommenu {
+    bottom: 70px;
+  }
+  .vimeo-wrapper iframe {
+    min-height: 100%;
+  }
+  .banner {
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #logo-text {
+    width: 50%;
+    line-height: 1em;
+  }
+  .all-screen {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
+  }
+  .menuall,
+  .menucontent,
+  .menucontent1 {
+    font-size: 1em;
+  }
+  .videobar {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .logo-icon img {
+    max-width: 80px;
+  }
+  .menucontent {
+    font-size: 12px;
+  }
+  .menucontent1 {
+    font-size: 11px;
+  }
+  h2 {
+    font-size: 15px !important;
+  }
+  .videotext p {
+    font-size: 12px;
+    line-height: inherit;
+  }
+}
